@@ -8,19 +8,22 @@
     {% tailwind_css %}
 </head>
 <body class="bg-gray-100 font-sans">
-    <nav class="bg-blue-600 p-4 text-white shadow-lg">
-        <div class="container mx-auto flex justify-between">
-            <h1 class="text-xl font-bold">Sistema de Reservas</h1>
-            <div>
-                {% if user.is_authenticated %}
-                    <span>Olá, {{ user.username }}</span>
-                    <a href="/admin/logout/" class="ml-4 bg-red-500 px-3 py-1 rounded">Sair</a>
-                {% else %}
-                    <a href="/admin/login/" class="bg-green-500 px-3 py-1 rounded">Login</a>
-                {% endif %}
-            </div>
-        </div>
-    </nav>
+    
+<nav class="bg-blue-600 p-4 text-white flex justify-between items-center shadow-md">
+    <a href="/" class="text-xl font-bold">Reserva de Salas</a>
+    
+    <div class="space-x-4">
+        {% if user.is_authenticated %}
+            <span class="font-medium">Olá, {{ user.username }}!</span>
+            <form action="{% url 'logout' %}" method="post" class="inline">
+                {% csrf_token %}
+                <button type="submit" class="bg-red-500 hover:bg-red-600 px-3 py-1 rounded transition">Sair</button>
+            </form>
+        {% else %}
+            <a href="{% url 'login' %}" class="bg-green-500 hover:bg-green-600 px-4 py-2 rounded transition">Entrar</a>
+        {% endif %}
+    </div>
+</nav>
 
     <main class="container mx-auto mt-10">
         {% block content %}
