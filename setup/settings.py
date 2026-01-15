@@ -119,5 +119,8 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+LOGIN_REDIRECT_URL = '/'  # Vai para a home após logar
+LOGOUT_REDIRECT_URL = '/accounts/login/'  # Vai para o login após sair
+
 TAILWIND_APP_NAME = 'theme'
 INTERNAL_IPS = ["127.0.0.1"]
