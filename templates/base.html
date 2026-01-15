@@ -1,0 +1,30 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserva de Salas</title>
+    {% tailwind_css %}
+</head>
+<body class="bg-gray-100 font-sans">
+    <nav class="bg-blue-600 p-4 text-white shadow-lg">
+        <div class="container mx-auto flex justify-between">
+            <h1 class="text-xl font-bold">Sistema de Reservas</h1>
+            <div>
+                {% if user.is_authenticated %}
+                    <span>Olá, {{ user.username }}</span>
+                    <a href="/admin/logout/" class="ml-4 bg-red-500 px-3 py-1 rounded">Sair</a>
+                {% else %}
+                    <a href="/admin/login/" class="bg-green-500 px-3 py-1 rounded">Login</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto mt-10">
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>
