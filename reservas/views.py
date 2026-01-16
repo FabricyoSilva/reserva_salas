@@ -25,18 +25,22 @@ def home(request):
     return render(request, 'reservas/home.html', {'salas': salas})
 
 @login_required
-def reservar_sala(request):
+def reservar_sala(request, sala_id):
+    sala = get_object_or_404(Sala, pk=sala_id)
+    
     if request.method == 'POST':
         form = ReservaForm(request.POST)
         if form.is_valid():
             reserva = form.save(commit=False)
-            reserva.usuario = request.user 
+            reserva.usuario = request.user
+            reserva.sala = sala  # Força a sala selecionada
             reserva.save()
             return redirect('home')
     else:
-        form = ReservaForm()
+        form = ReservaForm(initial={'sala': sala})
+        form.fields['sala'].disabled = True  # Desabilita o campo
     
-    return render(request, 'reservas/reservar.html', {'form': form})
+    return render(request, 'reservas/reservar.html', {'form': form, 'sala': sala})
 @login_required
 def minhas_reservas(request):
     reservas = Reserva.objects.filter(usuario=request.user).order_by('-data')

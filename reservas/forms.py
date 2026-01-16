@@ -26,7 +26,7 @@ class ReservaForm(forms.ModelForm):
             'data': forms.DateInput(attrs={'type': 'date', 'class': 'w-full p-2 border rounded'}),
             'hora_inicio': forms.TimeInput(attrs={'type': 'time', 'class': 'w-full p-2 border rounded'}),
             'hora_fim': forms.TimeInput(attrs={'type': 'time', 'class': 'w-full p-2 border rounded'}),
-            'sala': forms.Select(attrs={'class': 'w-full p-2 border rounded'}),
+            'sala': forms.Select(attrs={'class': 'w-full p-2 border rounded appearance-none'}),
         }
 
 

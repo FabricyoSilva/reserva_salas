@@ -1,14 +1,53 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md mt-10">
-    <h2 class="text-2xl font-bold mb-6 text-gray-800">Nova Reserva</h2>
-    <form method="post" class="space-y-4">
+<div class="max-w-lg mx-auto bg-white p-8 rounded-xl shadow-lg mt-10">
+    <div class="border-b-2 border-blue-600 pb-4 mb-6">
+        <h2 class="text-3xl font-bold text-gray-800">Nova Reserva</h2>
+        {% if sala %}
+        <p class="text-gray-600 mt-2">Reservando: <span class="font-semibold text-blue-600">{{ sala.nome }}</span></p>
+        {% endif %}
+    </div>
+    
+    <form method="post" class="space-y-5">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">
+        
+        <div>
+            <label for="{{ form.sala.id_for_label }}" class="block text-sm font-semibold text-gray-700 mb-2">Sala:</label>
+            {{ form.sala }}
+            {% if form.sala.errors %}
+                <p class="mt-1 text-sm text-red-600">{{ form.sala.errors.0 }}</p>
+            {% endif %}
+        </div>
+
+        <div>
+            <label for="{{ form.data.id_for_label }}" class="block text-sm font-semibold text-gray-700 mb-2">Data:</label>
+            {{ form.data }}
+            {% if form.data.errors %}
+                <p class="mt-1 text-sm text-red-600">{{ form.data.errors.0 }}</p>
+            {% endif %}
+        </div>
+
+        <div>
+            <label for="{{ form.hora_inicio.id_for_label }}" class="block text-sm font-semibold text-gray-700 mb-2">Hora início:</label>
+            {{ form.hora_inicio }}
+            {% if form.hora_inicio.errors %}
+                <p class="mt-1 text-sm text-red-600">{{ form.hora_inicio.errors.0 }}</p>
+            {% endif %}
+        </div>
+
+        <div>
+            <label for="{{ form.hora_fim.id_for_label }}" class="block text-sm font-semibold text-gray-700 mb-2">Hora fim:</label>
+            {{ form.hora_fim }}
+            {% if form.hora_fim.errors %}
+                <p class="mt-1 text-sm text-red-600">{{ form.hora_fim.errors.0 }}</p>
+            {% endif %}
+        </div>
+
+        <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition font-semibold shadow-sm mt-6">
             Confirmar Reserva
         </button>
     </form>
-    <a href="{% url 'home' %}" class="block text-center mt-4 text-sm text-gray-500 hover:underline">Cancelar</a>
+    
+    <a href="{% url 'home' %}" class="block text-center mt-4 text-sm text-gray-600 hover:text-blue-600 transition">Cancelar</a>
 </div>
 {% endblock %}
