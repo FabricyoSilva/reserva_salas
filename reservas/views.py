@@ -8,6 +8,9 @@ from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic import CreateView
+from django.contrib.admin.views.decorators import staff_member_required
+from .forms import SalaForm
+
 
 class SignUpView(generic.CreateView):
     form_class = UserCreationForm
@@ -47,3 +50,14 @@ def cancelar_reserva(request, pk):
         return redirect('minhas_reservas')
     
     return render(request, 'reservas/confirmar_cancelamento.html', {'reserva': reserva})
+
+@staff_member_required
+def cadastrar_sala(request):
+    if request.method == 'POST':
+        form = SalaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = SalaForm()
+    return render(request, 'reservas/cadastrar_sala.html', {'form': form})
