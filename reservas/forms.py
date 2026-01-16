@@ -1,6 +1,9 @@
 from django import forms
 from .models import Reserva
-from .models import Sala
+from django.contrib.auth.forms import UserCreationForm
+from .models import Usuario, Sala
+
+
 class ReservaForm(forms.ModelForm):
     class Meta:
         model = Reserva
@@ -11,6 +14,19 @@ class ReservaForm(forms.ModelForm):
             'hora_fim': forms.TimeInput(attrs={'type': 'time', 'class': 'w-full p-2 border rounded'}),
             'sala': forms.Select(attrs={'class': 'w-full p-2 border rounded'}),
         }
+
+class CustomUserCreationForm(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
+        model = Usuario
+        fields = ('email', 'username') # O Django ainda pede username, mas focaremos no email
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Aplicando Tailwind e removendo textos de ajuda chatos
+        for field in self.fields.values():
+            field.widget.attrs.update({'class': 'w-full p-2 border rounded-lg focus:ring-green-500'})
+            field.help_text = '' 
+
 class SalaForm(forms.ModelForm):
     class Meta:
         model = Sala
