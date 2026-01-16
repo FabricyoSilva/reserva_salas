@@ -7,31 +7,94 @@
     <title>Reserva de Salas</title>
     {% tailwind_css %}
 </head>
-<body class="bg-gray-100 font-sans">
+<body class="bg-gray-100 font-sans flex flex-col min-h-screen">
     
-<nav class="bg-blue-600 p-4 text-white flex justify-between items-center shadow-md">
-    <a href="/" class="text-xl font-bold">Reserva de Salas</a>
-    
-    <div class="space-x-4 flex items-center">
-        {% if user.is_authenticated %}
-            <a href="{% url 'minhas_reservas' %}" class="hover:text-blue-200 transition">Minhas Reservas</a>
-            <span class="text-blue-300">|</span> 
-            
-            <span class="font-medium">Olá, {{ user.username }}!</span>
-            
-            <form action="{% url 'logout' %}" method="post" class="inline">
-                {% csrf_token %}
-                <button type="submit" class="bg-red-500 hover:bg-red-600 px-3 py-1 rounded transition">Sair</button>
-            </form>     
-        {% else %}
-            <a href="{% url 'login' %}" class="bg-green-500 hover:bg-green-600 px-4 py-2 rounded transition">Entrar</a>
-        {% endif %}
-    </div>
-</nav>
+    <!-- Navbar -->
+    <nav class="bg-blue-600 p-4 text-white flex justify-between items-center shadow-md">
+        <a href="/" class="text-xl font-bold">Reserva de Salas</a>
+        
+        <div class="space-x-4 flex items-center">
+            {% if user.is_authenticated %}
+                <a href="{% url 'minhas_reservas' %}" class="hover:text-blue-200 transition">Minhas Reservas</a>
+                <span class="text-blue-300">|</span> 
+                
+                <span class="font-medium">Olá, {{ user.username }}!</span>
+                
+                <form action="{% url 'logout' %}" method="post" class="inline">
+                    {% csrf_token %}
+                    <button type="submit" class="bg-red-500 hover:bg-red-600 px-3 py-1 rounded transition">Sair</button>
+                </form>     
+            {% else %}
+                <a href="{% url 'login' %}" class="bg-green-500 hover:bg-green-600 px-4 py-2 rounded transition">Entrar</a>
+            {% endif %}
+        </div>
+    </nav>
 
-    <main class="container mx-auto mt-10">
-        {% block content %}
-        {% endblock %}
-    </main>
+    <!-- Conteúdo Principal com Sidebar -->
+    <div class="flex flex-1">
+        {% if user.is_staff %}
+        <aside id="sidebar" class="w-64 bg-gray-800 text-white p-6 transition-all duration-300 ease-in-out relative">
+            <button id="toggleSidebar" class="absolute -right-3 top-6 bg-blue-600 hover:bg-blue-700 text-white rounded-full w-6 h-6 flex items-center justify-center shadow-lg transition">
+                <span id="sidebarIcon">←</span>
+            </button>
+            <div id="sidebarContent">
+                <h3 class="text-xs uppercase text-gray-400 font-bold mb-6">Painel de Gestão</h3>
+                <ul class="space-y-3">
+                    <li>
+                        <a href="{% url 'home' %}" class="flex items-center gap-3 p-2 rounded hover:bg-gray-700 transition">
+                            <span class="sidebar-text">Ver Site</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'dashboard_admin' %}" class="flex items-center gap-3 p-2 rounded hover:bg-gray-700 transition">
+                            <span class="sidebar-text">Todas as Reservas</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'cadastrar_sala' %}" class="flex items-center gap-3 p-2 rounded hover:bg-gray-700 transition">
+                            <span class="sidebar-text">Gerenciar Salas</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+        {% endif %}
+
+        <main class="flex-1 p-10">
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebar = document.getElementById('sidebar');
+            const toggleBtn = document.getElementById('toggleSidebar');
+            const sidebarIcon = document.getElementById('sidebarIcon');
+            const sidebarTexts = document.querySelectorAll('.sidebar-text');
+            const sidebarContent = document.getElementById('sidebarContent');
+            
+            if (toggleBtn) {
+                let isCollapsed = false;
+                
+                toggleBtn.addEventListener('click', function() {
+                    isCollapsed = !isCollapsed;
+                    
+                    if (isCollapsed) {
+                        sidebar.classList.remove('w-64');
+                        sidebar.classList.add('w-16');
+                        sidebarIcon.textContent = '→';
+                        sidebarTexts.forEach(text => text.classList.add('hidden'));
+                        sidebarContent.querySelector('h3').classList.add('hidden');
+                    } else {
+                        sidebar.classList.remove('w-16');
+                        sidebar.classList.add('w-64');
+                        sidebarIcon.textContent = '←';
+                        sidebarTexts.forEach(text => text.classList.remove('hidden'));
+                        sidebarContent.querySelector('h3').classList.remove('hidden');
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>

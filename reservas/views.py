@@ -1,4 +1,3 @@
-from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Sala
@@ -7,13 +6,16 @@ from .models import Reserva
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
-from django.views.generic import CreateView
 from django.contrib.admin.views.decorators import staff_member_required
 from .forms import SalaForm
+from django.urls import reverse_lazy
+from django.views import generic
+from .forms import CustomUserCreationForm
+
 
 
 class SignUpView(generic.CreateView):
-    form_class = UserCreationForm
+    form_class = CustomUserCreationForm
     success_url = reverse_lazy('login')
     template_name = 'registration/signup.html'
     
@@ -61,3 +63,20 @@ def cadastrar_sala(request):
     else:
         form = SalaForm()
     return render(request, 'reservas/cadastrar_sala.html', {'form': form})
+
+@login_required
+def editar_reserva(request, pk):
+    reserva = get_object_or_404(Reserva, pk=pk, usuario=request.user)
+    if request.method == 'POST':
+        form = ReservaForm(request.POST, instance=reserva)
+        if form.is_valid():
+            form.save()
+            return redirect('minhas_reservas')
+    else:
+        form = ReservaForm(instance=reserva)
+    return render(request, 'reservas/reservar.html', {'form': form, 'editando': True})
+
+@staff_member_required
+def dashboard_admin(request):
+    todas_reservas = Reserva.objects.all().order_by('-data')
+    return render(request, 'reservas/dashboard_admin.html', {'reservas': todas_reservas})

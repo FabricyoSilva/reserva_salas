@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load tz %}
+{% block content %}
+<div class="bg-white p-8 rounded-xl shadow-lg">
+    <!-- Cabeçalho -->
+    <div class="flex justify-between items-center mb-8 pb-4 border-b-2 border-gray-200">
+        <div>
+            <h2 class="text-3xl font-bold text-gray-800">Controle Geral de Reservas</h2>
+            <p class="text-gray-500 mt-1">Visualize e gerencie todas as reservas do sistema</p>
+        </div>
+        <div class="bg-blue-50 px-4 py-2 rounded-lg">
+            <span class="text-blue-600 font-semibold">Total: {{ reservas|length }} reserva{{ reservas|length|pluralize }}</span>
+        </div>
+    </div>
+
+    <!-- Tabela -->
+    <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+            <thead>
+                <tr class="bg-gradient-to-r from-gray-100 to-gray-50 border-b-2 border-gray-300">
+                    <th class="p-4 font-semibold text-gray-700 text-sm uppercase tracking-wider">Sala</th>
+                    <th class="p-4 font-semibold text-gray-700 text-sm uppercase tracking-wider">Usuário</th>
+                    <th class="p-4 font-semibold text-gray-700 text-sm uppercase tracking-wider">Data</th>
+                    <th class="p-4 font-semibold text-gray-700 text-sm uppercase tracking-wider">Horário</th>
+                    <th class="p-4 font-semibold text-gray-700 text-sm uppercase tracking-wider">Localização</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in reservas %}
+                <tr class="border-b border-gray-200 hover:bg-gray-50 transition duration-150">
+                    <td class="p-4">
+                        <span class="font-bold text-gray-800">{{ r.sala.nome }}</span>
+                    </td>
+                    <td class="p-4">
+                        <div>
+                            <p class="text-gray-800 font-medium">{{ r.usuario.username }}</p>
+                            <p class="text-gray-500 text-sm">{{ r.usuario.email }}</p>
+                        </div>
+                    </td>
+                    <td class="p-4">
+                        <span class="text-gray-800">{{ r.data|date:"d/m/Y" }}</span>
+                    </td>
+                    <td class="p-4">
+                        <span class="text-gray-800 font-medium">{{ r.hora_inicio|time:"H:i" }} - {{ r.hora_fim|time:"H:i" }}</span>
+                    </td>
+                    <td class="p-4">
+                        <span class="text-gray-600">{{ r.sala.localizacao|default:"N/A" }}</span>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="p-8 text-center text-gray-500">
+                        <p class="text-lg">Nenhuma reserva encontrada no momento.</p>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,11 +1,51 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="max-w-md mx-auto bg-white p-8 rounded-xl shadow-lg border-t-4 border-blue-600">
-    <h2 class="text-2xl font-bold mb-6">Cadastrar Nova Sala</h2>
-    <form method="post" class="space-y-4">
+<div class="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-lg">
+    <div class="border-b-2 border-blue-600 pb-4 mb-6">
+        <h2 class="text-3xl font-bold text-gray-800">Cadastrar Nova Sala</h2>
+        <p class="text-gray-500 mt-1">Preencha os dados para adicionar uma nova sala ao sistema</p>
+    </div>
+    
+    <form method="post" class="space-y-5">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">Salvar Sala</button>
+        
+        <div>
+            <label for="{{ form.nome.id_for_label }}" class="block text-sm font-semibold text-gray-700 mb-2">Nome da Sala</label>
+            {{ form.nome }}
+            {% if form.nome.errors %}
+                <p class="mt-1 text-sm text-red-600">{{ form.nome.errors.0 }}</p>
+            {% endif %}
+        </div>
+
+        <div>
+            <label for="{{ form.capacidade.id_for_label }}" class="block text-sm font-semibold text-gray-700 mb-2">Capacidade (pessoas)</label>
+            {{ form.capacidade }}
+            {% if form.capacidade.errors %}
+                <p class="mt-1 text-sm text-red-600">{{ form.capacidade.errors.0 }}</p>
+            {% endif %}
+        </div>
+
+        <div>
+            <label for="{{ form.localizacao.id_for_label }}" class="block text-sm font-semibold text-gray-700 mb-2">Localização</label>
+            {{ form.localizacao }}
+            {% if form.localizacao.errors %}
+                <p class="mt-1 text-sm text-red-600">{{ form.localizacao.errors.0 }}</p>
+            {% endif %}
+        </div>
+
+        <div>
+            <label for="{{ form.categoria.id_for_label }}" class="block text-sm font-semibold text-gray-700 mb-2">Categoria</label>
+            {{ form.categoria }}
+            {% if form.categoria.errors %}
+                <p class="mt-1 text-sm text-red-600">{{ form.categoria.errors.0 }}</p>
+            {% endif %}
+            <p class="mt-1 text-xs text-gray-500">Selecione uma categoria para a sala</p>
+        </div>
+
+        <div class="flex gap-3 pt-4">
+            <button type="submit" class="flex-1 bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition font-semibold shadow-sm">Salvar Sala</button>
+            <a href="{% url 'home' %}" class="flex-1 bg-gray-200 text-gray-700 py-3 rounded-lg hover:bg-gray-300 transition font-semibold text-center">Cancelar</a>
+        </div>
     </form>
 </div>
 {% endblock %}

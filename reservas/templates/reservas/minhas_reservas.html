@@ -37,6 +37,7 @@
                                 <span class="text-gray-700 text-base">{{ reserva.hora_fim|time:"H:i" }}</span>
                             </td>
                             <td class="py-5 px-6 text-center">
+                                <a href="{% url 'editar_reserva' reserva.pk %}" class="bg-yellow-500 text-white px-3 py-1 rounded-lg text-sm font-bold">Mudar Horário</a>
                                 <a href="{% url 'cancelar_reserva' reserva.pk %}" 
                                    class="inline-block px-6 py-2 bg-red-500 hover:bg-red-600 text-white font-medium rounded-lg transition-colors duration-150">
                                     Cancelar
