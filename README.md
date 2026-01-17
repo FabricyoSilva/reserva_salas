@@ -1,73 +1,55 @@
-## 🏢 Sistema de Reserva de Salas
-Este é um projeto de gestão de espaços desenvolvido em Django e Tailwind CSS. O sistema permite que usuários se cadastrem e reservem salas para reuniões ou estudos, enquanto administradores possuem um painel exclusivo para gerenciar salas, categorias e visualizar todas as ocupações através de uma barra lateral de controle.
+# 🏢 Sistema de Reserva de Salas
 
----
+![Status](https://img.shields.io/badge/Status-Em_Desenvolvimento-blue)
+![Python](https://img.shields.io/badge/Python-3.13-3776AB)
+![Django](https://img.shields.io/badge/Django-6.0-092E20)
+![Tailwind](https://img.shields.io/badge/Tailwind_CSS-3.0-38B2AC)
+
+Um sistema completo para gestão e reserva de espaços físicos, desenvolvido com **Django** e **Tailwind CSS**. O projeto conta com fluxos distintos para usuários comuns (reserva) e administradores (gestão completa via dashboard).
 
 ## 🚀 Funcionalidades
-Para Usuários Comuns
-Cadastro e Login Personalizado: Autenticação baseada em e-mail e senha.
 
-Reserva de Salas: Interface intuitiva para escolher data e horário.
+### 👤 Para Usuários
+* **Autenticação Segura:** Cadastro e login utilizando e-mail como identificador principal.
+* **Reserva de Salas:** Visualização de salas disponíveis e agendamento por data/horário.
+* **Meus Agendamentos:** Painel para consultar, editar horários ou cancelar reservas.
 
-Gestão de Reservas: Página "Minhas Reservas" para visualizar, alterar horário ou cancelar agendamentos.
-
-Para Administradores (Staff)
-Dashboard Exclusivo: Sidebar lateral para navegação rápida entre as ferramentas de gestão.
-
-Gestão de Salas: Cadastro de novas salas diretamente pela interface do site (sem precisar do Django Admin).
-
-Gestão de Categorias: Criação de categorias (ex: Reunião, Auditório) para organizar o catálogo.
-
-Relatório de Ocupação: Visão geral de quem reservou cada sala e em qual horário.
+### 🛡️ Para Administradores (Staff)
+* **Dashboard de Gestão:** Sidebar exclusiva para navegação rápida.
+* **Gerenciamento de Salas:** Cadastro de novas salas com capacidade e localização (interface personalizada fora do Django Admin).
+* **Categorização:** Criação e gestão de categorias (ex: Auditório, Laboratório).
+* **Controle de Ocupação:** Visualização global de todas as reservas ativas e usuários responsáveis.
 
 ---
 
-## 📸 Demonstração
+## 📸 Demonstração do Projeto
+
+| Página Inicial (Home) | Dashboard do Admin |
+| :---: | :---: |
+| ![Home](screenshots/home.png) | ![Dashboard](screenshots/dashboard.png) |
+| *Visualização das salas disponíveis* | *Sidebar e controle de gestão* |
+
+| Autenticação | Gestão de Reservas |
+| :---: | :---: |
+| ![Login](screenshots/login.png) | ![Reservas](screenshots/reservas.png) |
+| *Login limpo com Tailwind* | *Edição e cancelamento de reservas* |
 
 ---
+
 ## 🛠️ Tecnologias Utilizadas
-Python 3.13.9
 
-Django 6.0.1
-
-Tailwind CSS (via django-tailwind)
-
-SQLite (Banco de dados padrão)
+* **Backend:** Python 3.13.9, Django 6.0.1
+* **Frontend:** HTML5, Django Templates, Tailwind CSS (via `django-tailwind`)
+* **Banco de Dados:** SQLite (Padrão de desenvolvimento)
+* **Autenticação:** Custom User Model (E-mail based)
 
 ---
-## ⚙️ Como Rodar o Projeto
-Siga os passos abaixo para configurar o ambiente em sua máquina (Windows 11 ou Linux):
 
-1. Clonar o Repositório
-   
-git clone https://github.com/seu-usuario/reserva_salas.git
+## ⚙️ Como Rodar o Projeto Localmente
+
+Siga os passos abaixo para executar o sistema em sua máquina:
+
+### 1. Clone o repositório
+```bash
+git clone [https://github.com/SEU-USUARIO/reserva_salas.git](https://github.com/SEU-USUARIO/reserva_salas.git)
 cd reserva_salas
-
-2. Configurar o Ambiente Virtual
-
-python -m venv venv
-# No Windows:
-.\venv\Scripts\activate
-# No Linux:
-source venv/bin/activate
-
----
-
-3. Instalar Dependências
-
-pip install -r requirements.txt
-
-4. Configurar o Banco de Dados
-
-python manage.py makemigrations
-python manage.py migrate
-
-5. Criar um Administrador
-
-python manage.py createsuperuser
-
-6. Iniciar o Servidor
-
-python manage.py runserver
-
-Acesse: http://127.0.0.1:8000/
