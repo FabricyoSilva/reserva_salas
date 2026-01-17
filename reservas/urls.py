@@ -10,4 +10,5 @@ urlpatterns = [
     path('cadastrar-sala/', views.cadastrar_sala, name='cadastrar_sala'),
     path('editar-reserva/<int:pk>/', views.editar_reserva, name='editar_reserva'),
     path('gestao/', views.dashboard_admin, name='dashboard_admin'),
+    path('cadastrar-categoria/', views.cadastrar_categoria, name='cadastrar_categoria'),
 ]

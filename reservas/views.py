@@ -11,6 +11,7 @@ from .forms import SalaForm
 from django.urls import reverse_lazy
 from django.views import generic
 from .forms import CustomUserCreationForm
+from .forms import CategoriaForm
 
 
 
@@ -21,8 +22,13 @@ class SignUpView(generic.CreateView):
     
 @login_required
 def home(request):
-    salas = Sala.objects.all()
-    return render(request, 'reservas/home.html', {'salas': salas})
+    from .models import Categoria
+    categorias = Categoria.objects.prefetch_related('sala_set').all()
+    salas_sem_categoria = Sala.objects.filter(categoria__isnull=True)
+    return render(request, 'reservas/home.html', {
+        'categorias': categorias,
+        'salas_sem_categoria': salas_sem_categoria
+    })
 
 @login_required
 def reservar_sala(request, sala_id):
@@ -33,12 +39,12 @@ def reservar_sala(request, sala_id):
         if form.is_valid():
             reserva = form.save(commit=False)
             reserva.usuario = request.user
-            reserva.sala = sala  # Força a sala selecionada
+            reserva.sala = sala
             reserva.save()
             return redirect('home')
     else:
         form = ReservaForm(initial={'sala': sala})
-        form.fields['sala'].disabled = True  # Desabilita o campo
+        form.fields['sala'].disabled = True  #
     
     return render(request, 'reservas/reservar.html', {'form': form, 'sala': sala})
 @login_required
@@ -84,3 +90,15 @@ def editar_reserva(request, pk):
 def dashboard_admin(request):
     todas_reservas = Reserva.objects.all().order_by('-data')
     return render(request, 'reservas/dashboard_admin.html', {'reservas': todas_reservas})
+
+
+@staff_member_required
+def cadastrar_categoria(request):
+    if request.method == 'POST':
+        form = CategoriaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard_admin') # Redireciona para sua nova gestão
+    else:
+        form = CategoriaForm()
+    return render(request, 'reservas/cadastrar_categoria.html', {'form': form})

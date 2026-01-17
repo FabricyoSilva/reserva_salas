@@ -9,7 +9,9 @@ class Categoria(models.Model):
 
 
 class Usuario(AbstractUser):
-    email = models.EmailField(unique=True)
+    email = models.EmailField(unique=True, verbose_name='Email', error_messages={
+        'unique': 'Já existe um usuário com este email.',
+    })
     
     USERNAME_FIELD = 'email' 
     REQUIRED_FIELDS = ['username']
@@ -25,6 +27,11 @@ class Sala(models.Model):
 
     def __str__(self):
         return self.nome
+    
+    def tem_reserva_ativa(self):
+        from django.utils import timezone
+        hoje = timezone.now().date()
+        return self.reserva_set.filter(data__gte=hoje).exists()
 
 class Reserva(models.Model):
     sala = models.ForeignKey(Sala, on_delete=models.CASCADE)

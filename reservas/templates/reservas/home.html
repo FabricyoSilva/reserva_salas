@@ -14,28 +14,76 @@
         {% endif %}
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {% for sala in salas %}
-            <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow duration-300">
-                <div class="h-2 bg-blue-500"></div>
+    {% for categoria in categorias %}
+        {% if categoria.sala_set.all %}
+            <div class="mb-12">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 pb-2 border-b-2 border-blue-500">{{ categoria.nome }}</h2>
                 
-                <div class="p-6">
-                    <h2 class="text-xl font-bold text-gray-800 mb-2">{{ sala.nome }}</h2>
-                    
-                    <div class="flex items-center text-gray-600 mb-6">
-                        <span>Capacidade: <span class="font-semibold">{{ sala.capacidade }} pessoas</span></span>
-                    </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {% for sala in categoria.sala_set.all %}
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow duration-300">
+                            <div class="h-2 bg-blue-500"></div>
+                            
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-gray-800 mb-2">{{ sala.nome }}</h3>
+                                
+                                <div class="flex items-center text-gray-600 mb-6">
+                                    <span>Capacidade: <span class="font-semibold">{{ sala.capacidade }} pessoas</span></span>
+                                </div>
 
-                    <a href="{% url 'reservar_sala' sala.id %}" class="block w-full text-center bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-lg transition-colors shadow-sm">
-                        Reservar agora
-                    </a>
+                                {% if sala.tem_reserva_ativa %}
+                                    <div class="block w-full text-center bg-gray-400 text-white font-bold py-3 rounded-lg cursor-not-allowed">
+                                        Reservado
+                                    </div>
+                                {% else %}
+                                    <a href="{% url 'reservar_sala' sala.id %}" class="block w-full text-center bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-lg transition-colors shadow-sm">
+                                        Reservar agora
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
-        {% empty %}
-            <div class="col-span-full text-center py-12 bg-gray-50 rounded-lg border-2 border-dashed border-gray-300">
-                <p class="text-gray-500">Nenhuma sala cadastrada no momento.</p>
+        {% endif %}
+    {% endfor %}
+
+    {% if salas_sem_categoria %}
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 pb-2 border-b-2 border-gray-400">Outras Salas</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                {% for sala in salas_sem_categoria %}
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow duration-300">
+                        <div class="h-2 bg-gray-400"></div>
+                        
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">{{ sala.nome }}</h3>
+                            
+                            <div class="flex items-center text-gray-600 mb-6">
+                                <span>Capacidade: <span class="font-semibold">{{ sala.capacidade }} pessoas</span></span>
+                            </div>
+
+                            {% if sala.tem_reserva_ativa %}
+                                <div class="block w-full text-center bg-gray-400 text-white font-bold py-3 rounded-lg cursor-not-allowed">
+                                    Reservado
+                                </div>
+                            {% else %}
+                                <a href="{% url 'reservar_sala' sala.id %}" class="block w-full text-center bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-lg transition-colors shadow-sm">
+                                    Reservar agora
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
-        {% endfor %}
-    </div>
+        </div>
+    {% endif %}
+
+    {% if not categorias and not salas_sem_categoria %}
+        <div class="text-center py-12 bg-gray-50 rounded-lg border-2 border-dashed border-gray-300">
+            <p class="text-gray-500">Nenhuma sala cadastrada no momento.</p>
+        </div>
+    {% endif %}
 </div>
 {% endblock %}
