@@ -51,5 +51,51 @@ Siga os passos abaixo para executar o sistema em sua máquina:
 
 ### 1. Clone o repositório
 ```bash
-git clone [https://github.com/SEU-USUARIO/reserva_salas.git](https://github.com/SEU-USUARIO/reserva_salas.git)
+git clone [https://github.com/FabricyoSilva/reserva_salas.git](https://github.com/FabricyoSilva/reserva_salas.git)
 cd reserva_salas
+```
+
+### 2. Crie e ative o ambiente virtual
+````bash
+# Windows
+python -m venv venv
+.\venv\Scripts\activate
+
+# Linux/Mac
+python3 -m venv venv
+source venv/bin/activate
+`````
+
+
+### 3. Instale as dependências
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Configure o Banco de Dados
+
+```bash
+python manage.py makemigrations
+python manage.py migrate
+```
+### 6. Compile o CSS (Tailwind)
+Para garantir que o estilo visual carregue corretamente:
+```bash
+python manage.py tailwind build
+````
+### 7. Execute o Servidor
+```bash
+python manage.py runserver
+```
+
+Acesse no seu navegador: http://127.0.0.1:8000/
+
+---
+
+## 📂 Estrutura Principal
+
+reservas/: App principal contendo Models, Views, Forms e Templates.
+
+theme/: Configuração do Tailwind CSS.
+
+Core/: Configurações globais do projeto Django.
