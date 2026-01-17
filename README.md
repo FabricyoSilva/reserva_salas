@@ -26,18 +26,13 @@ Um sistema completo para gestão e reserva de espaços físicos, desenvolvido co
 
 | Página Inicial (Home) | Dashboard do Admin |
 | :---: | :---: |
-| ![Home](<img width="1912" height="926" alt="Captura de tela 2026-01-16 222413" src="https://github.com/user-attachments/assets/d54086dd-c763-4a37-bb9b-cb51782825e6" />
-) | ![Dashboard](<img width="1919" height="962" alt="Captura de tela 2026-01-16 222633" src="https://github.com/user-attachments/assets/854a2e43-981a-4194-bf67-7b1eda621acb" />
-) |
+| <img src="https://github.com/user-attachments/assets/d54086dd-c763-4a37-bb9b-cb51782825e6" width="1912" alt="Home" /> | <img src="https://github.com/user-attachments/assets/854a2e43-981a-4194-bf67-7b1eda621acb" width="1919" alt="Dashboard" /> |
 | *Visualização das salas disponíveis* | *Sidebar e controle de gestão* |
 
 | Autenticação | Gestão de Reservas |
 | :---: | :---: |
-| ![Login](<img width="1403" height="854" alt="Captura de tela 2026-01-16 222713" src="https://github.com/user-attachments/assets/d31dc476-a43e-4c6b-bdd5-5288973858b8" />
-) | ![Reservas](<img width="1919" height="950" alt="Captura de tela 2026-01-16 222810" src="https://github.com/user-attachments/assets/35144d7e-38b2-4678-8aae-723ffb145049" />
-) |
+| <img src="https://github.com/user-attachments/assets/d31dc476-a43e-4c6b-bdd5-5288973858b8" width="1403" alt="Login" /> | <img src="https://github.com/user-attachments/assets/35144d7e-38b2-4678-8aae-723ffb145049" width="1919" alt="Reservas" /> |
 | *Login limpo com Tailwind* | *Edição e cancelamento de reservas* |
-
 ---
 
 ## 🛠️ Tecnologias Utilizadas
