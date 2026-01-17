@@ -35,6 +35,12 @@ Um sistema completo para gestão e reserva de espaços físicos, desenvolvido co
 | *Login limpo com Tailwind* | *Edição e cancelamento de reservas* |
 ---
 
+## Diagrama ER
+
+<img width="500" height="517" alt="image" src="https://github.com/user-attachments/assets/c0a6599d-7609-464d-bcf7-0623eec9a2cd" />
+
+---
+
 ## 🛠️ Tecnologias Utilizadas
 
 * **Backend:** Python 3.13.9, Django 6.0.1
@@ -77,12 +83,8 @@ pip install -r requirements.txt
 python manage.py makemigrations
 python manage.py migrate
 ```
-### 6. Compile o CSS (Tailwind)
-Para garantir que o estilo visual carregue corretamente:
-```bash
-python manage.py tailwind build
-````
-### 7. Execute o Servidor
+
+### 6. Execute o Servidor
 ```bash
 python manage.py runserver
 ```
@@ -91,10 +93,9 @@ Acesse no seu navegador: http://127.0.0.1:8000/
 
 ---
 
-## 📂 Estrutura Principal
+## 📂 Estrutura do Projeto
 
-* `reservas/`: App principal contendo Models, Views, Forms e Templates.
-
-* `theme/`: Configuração do Tailwind CSS.
-
-* `core/`: Configurações globais do projeto Django.
+* `reservas/`: App principal contendo toda a lógica de negócios (Salas, Reservas, Categorias).
+* `setup/`: Configurações globais do projeto Django (`settings.py`, `urls.py`).
+* `theme/`: App de configuração do **Tailwind CSS**.
+* `templates/`: Arquivos HTML globais (como `base.html`, `navbar.html`) e templates de autenticação (`registration/`).
