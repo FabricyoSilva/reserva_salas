@@ -1,6 +1,5 @@
 # 🏢 Sistema de Reserva de Salas
 
-![Status](https://img.shields.io/badge/Status-Concluído-brightgreen))
 ![Python](https://img.shields.io/badge/Python-3.13-3776AB)
 ![Django](https://img.shields.io/badge/Django-6.0-092E20)
 ![Tailwind](https://img.shields.io/badge/Tailwind_CSS-3.0-38B2AC)
