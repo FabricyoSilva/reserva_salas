@@ -23,15 +23,17 @@ Um sistema completo para gestão e reserva de espaços físicos, desenvolvido co
 
 ## 📸 Demonstração do Projeto
 
+
 | Página Inicial (Home) | Dashboard do Admin |
 | :---: | :---: |
-| <img src="https://github.com/user-attachments/assets/d54086dd-c763-4a37-bb9b-cb51782825e6" width="1912" alt="Home" /> | <img src="https://github.com/user-attachments/assets/854a2e43-981a-4194-bf67-7b1eda621acb" width="1919" alt="Dashboard" /> |
+| <img src="assets/pagina_inicial.png" width="100%" alt="Home" /> | <img src="assets/dashbord_admin.png" width="100%" alt="Dashboard" /> |
 | *Visualização das salas disponíveis* | *Sidebar e controle de gestão* |
 
 | Autenticação | Gestão de Reservas |
 | :---: | :---: |
-| <img src="https://github.com/user-attachments/assets/d31dc476-a43e-4c6b-bdd5-5288973858b8" width="1403" alt="Login" /> | <img src="https://github.com/user-attachments/assets/35144d7e-38b2-4678-8aae-723ffb145049" width="1919" alt="Reservas" /> |
+| <img src="assets/autentificacao_login.png" width="100%" alt="Login" /> | <img src="assets/gestao_reservas.png" width="100%" alt="Reservas" /> |
 | *Login limpo com Tailwind* | *Edição e cancelamento de reservas* |
+
 ---
 
 ## Diagrama ER
