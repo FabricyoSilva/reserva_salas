@@ -1,6 +1,6 @@
 # 🏢 Sistema de Reserva de Salas
 
-![Status](https://img.shields.io/badge/Status-Em_Desenvolvimento-blue)
+![Status](https://img.shields.io/badge/Status-Concluído-brightgreen))
 ![Python](https://img.shields.io/badge/Python-3.13-3776AB)
 ![Django](https://img.shields.io/badge/Django-6.0-092E20)
 ![Tailwind](https://img.shields.io/badge/Tailwind_CSS-3.0-38B2AC)
@@ -84,7 +84,7 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-### 6. Execute o Servidor
+### 5. Execute o Servidor
 ```bash
 python manage.py runserver
 ```
@@ -96,6 +96,6 @@ Acesse no seu navegador: http://127.0.0.1:8000/
 ## 📂 Estrutura do Projeto
 
 * `reservas/`: App principal contendo toda a lógica de negócios (Salas, Reservas, Categorias).
-* `setup/`: Configurações globais do projeto Django (`settings.py`, `urls.py`).
+* `core/`: Configurações globais do projeto Django (`settings.py`, `urls.py`).
 * `theme/`: App de configuração do **Tailwind CSS**.
 * `templates/`: Arquivos HTML globais (como `base.html`, `navbar.html`) e templates de autenticação (`registration/`).
