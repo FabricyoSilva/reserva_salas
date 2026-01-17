@@ -26,12 +26,16 @@ Um sistema completo para gestão e reserva de espaços físicos, desenvolvido co
 
 | Página Inicial (Home) | Dashboard do Admin |
 | :---: | :---: |
-| ![Home](screenshots/home.png) | ![Dashboard](screenshots/dashboard.png) |
+| ![Home](<img width="1912" height="926" alt="Captura de tela 2026-01-16 222413" src="https://github.com/user-attachments/assets/d54086dd-c763-4a37-bb9b-cb51782825e6" />
+) | ![Dashboard](<img width="1919" height="962" alt="Captura de tela 2026-01-16 222633" src="https://github.com/user-attachments/assets/854a2e43-981a-4194-bf67-7b1eda621acb" />
+) |
 | *Visualização das salas disponíveis* | *Sidebar e controle de gestão* |
 
 | Autenticação | Gestão de Reservas |
 | :---: | :---: |
-| ![Login](screenshots/login.png) | ![Reservas](screenshots/reservas.png) |
+| ![Login](<img width="1403" height="854" alt="Captura de tela 2026-01-16 222713" src="https://github.com/user-attachments/assets/d31dc476-a43e-4c6b-bdd5-5288973858b8" />
+) | ![Reservas](<img width="1919" height="950" alt="Captura de tela 2026-01-16 222810" src="https://github.com/user-attachments/assets/35144d7e-38b2-4678-8aae-723ffb145049" />
+) |
 | *Login limpo com Tailwind* | *Edição e cancelamento de reservas* |
 
 ---
@@ -51,7 +55,7 @@ Siga os passos abaixo para executar o sistema em sua máquina:
 
 ### 1. Clone o repositório
 ```bash
-git clone [https://github.com/FabricyoSilva/reserva_salas.git](https://github.com/FabricyoSilva/reserva_salas.git)
+git clone https://github.com/FabricyoSilva/reserva_salas.git
 cd reserva_salas
 ```
 
