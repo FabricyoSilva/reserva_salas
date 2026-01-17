@@ -94,8 +94,8 @@ Acesse no seu navegador: http://127.0.0.1:8000/
 
 ## 📂 Estrutura Principal
 
-reservas/: App principal contendo Models, Views, Forms e Templates.
+* `reservas/`: App principal contendo Models, Views, Forms e Templates.
 
-theme/: Configuração do Tailwind CSS.
+* `theme/`: Configuração do Tailwind CSS.
 
-Core/: Configurações globais do projeto Django.
+* `core/`: Configurações globais do projeto Django.
