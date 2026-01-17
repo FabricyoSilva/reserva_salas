@@ -44,7 +44,9 @@ def reservar_sala(request, sala_id):
             return redirect('home')
     else:
         form = ReservaForm(initial={'sala': sala})
-        form.fields['sala'].disabled = True  #
+    
+    # Ocultar o campo sala do formulário
+    form.fields['sala'].widget = form.fields['sala'].hidden_widget()
     
     return render(request, 'reservas/reservar.html', {'form': form, 'sala': sala})
 @login_required

@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
 from .models import Sala
 from .models import Categoria
+from django.utils import timezone
 
 User = get_user_model()
 
@@ -36,6 +37,39 @@ class ReservaForm(forms.ModelForm):
             'hora_fim': forms.TimeInput(attrs={'type': 'time', 'class': 'w-full p-2 border rounded'}),
             'sala': forms.Select(attrs={'class': 'w-full p-2 border rounded appearance-none'}),
         }
+    
+    def clean_data(self):
+        data = self.cleaned_data.get('data')
+        hoje = timezone.now().date()
+        
+        if data and data < hoje:
+            raise forms.ValidationError('Não é possível reservar uma sala em uma data passada. Por favor, selecione hoje ou uma data futura.')
+        
+        return data
+    
+    def clean(self):
+        cleaned_data = super().clean()
+        data = cleaned_data.get('data')
+        hora_inicio = cleaned_data.get('hora_inicio')
+        hora_fim = cleaned_data.get('hora_fim')
+        
+        # Validar que hora_fim é maior que hora_inicio
+        if hora_inicio and hora_fim:
+            if hora_fim <= hora_inicio:
+                raise forms.ValidationError('O horário de término deve ser posterior ao horário de início.')
+        
+        # Validar que não é possível reservar em horário passado
+        if data and hora_inicio:
+            from django.utils.timezone import localtime
+            agora = localtime(timezone.now())
+            hoje = agora.date()
+            hora_atual = agora.time()
+            
+            # Se a data é hoje, verificar se o horário já passou
+            if data == hoje and hora_inicio <= hora_atual:
+                raise forms.ValidationError('Não é possível reservar uma sala em um horário que já passou. Por favor, selecione um horário futuro.')
+        
+        return cleaned_data
 
 
 class SalaForm(forms.ModelForm):
